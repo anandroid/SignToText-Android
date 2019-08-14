@@ -1,13 +1,13 @@
 package com.example.mycamera_app;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,16 +25,23 @@ public class MainActivity extends AppCompatActivity {
         Intent videoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
         videoIntent.putExtra("android.intent.extras.CAMERA_FACING", 1);
 
-        if(videoIntent.resolveActivity(getPackageManager()) != null) {
+        if (videoIntent.resolveActivity(getPackageManager()) != null) {
 
-            startActivityForResult(videoIntent , VIDEO_REQUEST);
+            startActivityForResult(videoIntent, VIDEO_REQUEST);
         }
     }
 
     public void playVideo(View view) {
 
         Intent playIntent = new Intent(this, CaptureVideoActivity.class);
-        playIntent.putExtra("videoUri" , videoUri.toString());
+        playIntent.putExtra("videoUri", videoUri.toString());
+        startActivity(playIntent);
+    }
+
+    public void convertVideo(View view) {
+
+        Intent playIntent = new Intent(this, ResultActivity.class);
+        playIntent.putExtra("videoUri", videoUri.toString());
         startActivity(playIntent);
     }
 
